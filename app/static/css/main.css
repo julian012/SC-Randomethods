@@ -1,0 +1,250 @@
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #777777;
+    background-image:
+            linear-gradient(to right bottom,
+            rgba(126, 213, 111, 0.8),
+            rgba(40, 180, 133, 0.8));
+    padding-bottom: 50px;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+.main-header {
+    width: 100%;
+    height: 30vh;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-title {
+    color: white;
+    font-weight: 400;
+    letter-spacing: 5px;
+}
+
+.main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.main-menu {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+    margin: 20px 0;
+    color: rgba(126, 213, 111, 0.8);
+}
+
+.main-menu-option {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    background-color: white;
+    color: rgba(126, 213, 111, 0.8);
+    width: 120px;
+    height: 120px;
+    padding: 10px 10px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    margin: 10px;
+    text-align: center;
+    border-radius: 3px;
+    transition: all 0.4s;
+}
+
+/*Nav items*/
+
+.main-menu-option:active,
+.main-menu-option:visited,
+.main-menu-option:hover {
+    color: rgba(126, 213, 111, 0.8);
+    text-decoration: none;
+}
+
+.main-menu-option:hover {
+    transform: scale(1.05);
+}
+
+.active-option {
+    color: #777777;
+}
+
+
+.welcome-screen {
+    width: 100%;
+}
+
+.secondary-title {
+    text-align: center;
+    color: white;
+    font-size: 24px;
+    font-weight: 300;
+}
+
+.side-tab-pane {
+    display: none;
+    width: 100%;
+}
+
+.tab-result {
+    width: 40%;
+    margin: 0 20px;
+    text-align: center;
+}
+
+/*form*/
+.form-container {
+    width: 100%;
+}
+
+.row-input {
+    display: flex;
+    justify-content: space-around;
+}
+
+form {
+    text-align: center;
+}
+
+/*form inputs*/
+input {
+    display: block;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: none;
+    outline: none;
+    padding: 6px 10px;
+    border-radius: 3px;
+    width: 90%;
+    transition: all 0.3s;
+    color: white;
+    margin: 5px 10px;
+}
+
+input:focus {
+    border-bottom: 2px solid white;
+}
+
+label {
+    display: block;
+    color: white;
+    font-size: 18px;
+}
+
+/*Table*/
+.table-container {
+    padding: 10px 5px;
+}
+
+.table-container .table thead {
+    background-color: black;
+    color: white;
+}
+
+table {
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+tbody {
+    display: block;
+    height: 200px;
+    overflow-y: auto;
+    color: white;
+}
+
+thead, tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    border: none;
+    outline: none;
+    color: white;
+}
+
+.th-index {
+    width: 20%;
+    text-align: center;
+}
+
+.th-number {
+    width: 80%;
+    text-align: center;
+}
+
+button {
+    margin: 5px;
+}
+
+.btn {
+    background-color: white;
+    color: yellowgreen;
+    padding: 5px 30px;
+}
+
+.btn:hover {
+    color: yellowgreen;
+}
+
+.btn-primary {
+    background-color: #777777;
+    color: white;
+    padding: 5px 30px;
+    border: none;
+}
+
+.btn-primary:hover,
+.btn-primary:active {
+    background-color: rgb(90, 90, 90);
+}
+
+/*Methods forms*/
+.card-container {
+    border: 1px black solid;
+    padding: 20px 20px;
+    border-radius: 15px;
+}
+
+.home-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+}
+
+.side-pane {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+
+    .nav{
+        width: 100%;
+        justify-content: center;
+    }
+
+    .tab-result {
+        width: 100%;
+        justify-content: center;
+    }
+}
+

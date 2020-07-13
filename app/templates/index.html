@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Números Pseudoaleatorios</title>
+    <!--    Bootstrap-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <!--   Comic Neue Font-->
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@1,300&display=swap" rel="stylesheet">
+    <!-- Lato Font -->
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
+    <!--    Custom Css-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" type="text/css">
+</head>
+<body>
+<main>
+    <div class="main-header">
+        <h1 class="main-title">Generación de Números Pseudoaleatorios</h1>
+    </div>
+    <div class="main-container">
+        <div class="main-menu">
+            <a class="main-menu-option option-active" href="#home" onclick="openTab('home')">Inicio</a>
+            <a class="main-menu-option" href="#mean_square" onclick="openTab('mean_square')">Cuadrados medios</a>
+            <a class="main-menu-option" href="#linear_congruence" onclick="openTab('linear_congruence')">Congruencia lineal</a>
+            <a class="main-menu-option" href="#multiplicative_congruence" onclick="openTab('multiplicative_congruence')">Congruencia multiplicativa</a>
+            <a class="main-menu-option" href="#uniform_ditribution" onclick="openTab('uniform_ditribution')">Distribución Uniforme</a>
+            <a class="main-menu-option" href="#normal_ditribution" onclick="openTab('normal_ditribution')">Distribución Normal</a>
+        </div>
+        <div class="side-pane">
+            <div class="nav">
+                <div class="welcome-screen tab" id="home">
+                    <p class="secondary-title">Selecciona un método para iniciar</p>
+                </div>
+                <div class="side-tab-pane tab" id="mean_square">
+                    <p class="secondary-title">Cuadrados Medios</p>
+                    {% include 'components/mean_square_form.html' %}
+                </div>
+                <div class="side-tab-pane tab" id="linear_congruence">
+                    <p class="secondary-title">Congruencia Lineal</p>
+                    {% include 'components/linear_congruence_form.html' %}
+                </div>
+                <div class="side-tab-pane tab" id="multiplicative_congruence">
+                    <p class="secondary-title">Congruencia Multiplicativa</p>
+                    {% include 'components/multiplicative_congruence_form.html' %}
+                </div>
+                <div class="side-tab-pane tab" id="uniform_ditribution">
+                    <p class="secondary-title">Distribución Uniforme</p>
+                    {% include 'components/uniform_ditribution_form.html' %}
+                </div>
+                <div class="side-tab-pane tab" id="normal_ditribution">
+                    <p class="secondary-title">Distribución Normal</p>
+                    {% include 'components/normal_ditribution_form.html' %}
+                </div>
+            </div>
+            {% if nums %}
+                <div class="tab-result">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th class="th-index" scope="col">#</th>
+                            <th class="th-number" scope="col">Número</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for x in range(nums|length) %}
+                            <tr>
+                                <th class="th-index" scope="row">{{ x + 1 }}</th>
+                                <td class="th-number">{{ nums[x] }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <button class="btn btn-primary">Comprobar</button>
+                    <button class="btn">Descargar</button>
+                </div>
+
+            {% endif %}
+        </div>
+    </div>
+</main>
+<script>
+    function openTab(tabName) {
+        const x = document.getElementsByClassName("tab");
+        for (let i = 0; i < x.length; i++) x[i].style.display = "none";
+        document.getElementById(tabName).style.display = "block";
+    }
+</script>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>

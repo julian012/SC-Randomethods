@@ -1,0 +1,15 @@
+{% from 'render_elements.html' import render_alert %}
+
+{% with messages = get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+        <div class="container">
+            {% for category, message in messages %}
+                {% if category == 'success' %}
+                    {{ render_alert('alert-primary', message) }}
+                {% else %}
+                    {{ render_alert('alert-danger', message) }}
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}
