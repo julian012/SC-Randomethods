@@ -1,9 +1,9 @@
 import numpy as np
 from numpy import random
 import math
-from scipy.stats import norm
+from scipy.stats import norm, chi2
 
-class MeanTest:
+class VarianceTest:
 
     def __init__(self, array, freedom):
         self.array = array
@@ -11,14 +11,14 @@ class MeanTest:
         self.acceptance = 1 - freedom
         self.size = len(array)
         self.average = np.average(array)
+        self.variace = np.var(array)
+        self.half_freedom = self.freedom/2
         self.freedomRange = 1 - (self.freedom/2)
-        self.z = norm.ppf(self.freedomRange)
-        self.sub_l = (self.z*(1/math.sqrt(12*self.size)))
-        self.li = 0.5 - self.sub_l
-        self.ls = 0.5 + self.sub_l
-        self.min = np.amin(self.array)
-        self.max = np.amax(self.array)
-        self.result = np.where(self.li <= self.average and self.average <= self.ls, 'Cumple', 'No cumple')
+        self.invChi2 = chi2.isf(self.half_freedom, self.size - 1)
+        self.invChi2_less_one = chi2.isf(1 - self.half_freedom, self.size - 1)
+        self.li = self.invChi2/(12*(self.size - 1))
+        self.ls = self.invChi2_less_one/(12*(self.size - 1))
+        self.result = np.where(self.li >= self.variace and self.variace >= self.ls, 'Cumple', 'No cumple')
 
     def getArray(self):
         return self.array
@@ -32,35 +32,26 @@ class MeanTest:
     def getSize(self):
         return self.size
 
-    def getAverage(self):
-        return self.average
-
+    def getVariance(self):
+        return self.variace
+    
     def getFreedomRange(self):
         return self.freedomRange
-
-    def getZ(self):
-        return self.z
-
+    
     def getLI(self):
         return self.li
 
     def getLS(self):
         return self.ls
-
-    def getMin(self):
-        return self.min
-
-    def getMax(self):
-        return self.max
-
+    
     def getResult(self):
         return self.result
 
 #array = random.rand(50)
-#t = MeanTest(array,0.05)
-#print(t.getMin())
-#print(t.getMax())
-#print(t.getAverage())
+#print(array)
+#t = VarianceTest(array,0.05)
+
+#print(t.getVariance())
 #print(t.getLI())
 #print(t.getLS())
 #print(t.getResult())
