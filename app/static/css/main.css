@@ -127,7 +127,7 @@ form {
 }
 
 /*form inputs*/
-input {
+input, select {
     display: block;
     background-color: rgba(255, 255, 255, 0.1);
     border: none;
@@ -140,8 +140,12 @@ input {
     margin: 5px 10px;
 }
 
-input:focus {
+input:focus, select:focus {
     border-bottom: 2px solid white;
+}
+
+option {
+    color: #777777;
 }
 
 label {
@@ -236,15 +240,27 @@ button {
     flex-direction: column;
     align-items: center;
     width: 100%;
-
-    .nav{
-        width: 100%;
-        justify-content: center;
-    }
-
-    .tab-result {
-        width: 100%;
-        justify-content: center;
-    }
 }
 
+/*.nav {*/
+/*    width: 100%;*/
+/*    justify-content: center;*/
+/*}*/
+
+.tab-result {
+    width: 80%;
+    margin-left: 10%;
+    justify-content: center;
+}
+
+/* Proof */
+.check-group {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+input[type=checkbox] {
+    width: auto;
+    margin-left: 30px;
+}

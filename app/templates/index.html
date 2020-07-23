@@ -72,10 +72,24 @@
                         {% endfor %}
                         </tbody>
                     </table>
-                    <button class="btn btn-primary">Comprobar</button>
-                    <button class="btn">Descargar</button>
+                    <br>
+                    <label name="Prueba de números"/>
+                    <form id="proof-form" class="form-container">
+                        <div class="check-group">
+                            <input type="checkbox" name="varianza" value="varianza">
+                            <label for="varianza">Varianza</label>
+                            <input type="checkbox" name="cuadrados-medios" value="cuadrados-medios">
+                            <label for="cuadrados-medios"> Cuadrados Medios </label>
+                            <input type="checkbox" name="ks" value="ks">
+                            <label for="ks"> KS </label>
+                            <input type="checkbox" name="chi-cuadrado" value="chi-cuadrado">
+                            <label for="chi-cuadrado"> Chi Cuadrado </label>
+                        </div>
+                        <br>
+                    </form>
+                    <button type="button" class="btn btn-primary" onclick="onSubmit({{ nums }})">Comprobar</button>
+{#                    <button class="btn">Descargar</button>#}
                 </div>
-
             {% endif %}
         </div>
     </div>
@@ -85,6 +99,23 @@
         const x = document.getElementsByClassName("tab");
         for (let i = 0; i < x.length; i++) x[i].style.display = "none";
         document.getElementById(tabName).style.display = "block";
+    }
+    
+    function onSubmit(table) {
+        const data = {};
+        const formElements = document.getElementById('proof-form').elements;
+        for (let i = 0; i < formElements.length; i++)
+            data[formElements[i].value] = formElements[i].checked;
+        data['numbers'] = table;
+        fetch(`${window.origin}/`, {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(res => res.json())
+            .then(response => console.log(response))
     }
 </script>
 

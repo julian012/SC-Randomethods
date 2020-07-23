@@ -1,8 +1,13 @@
-from flask import request, render_template, flash, url_for
+from flask import request, render_template, url_for
 import os
 from app import app
 from app.lib.methods import mean_square_method, linear_congruence_method, multiplicative_congruence_method, \
     uniform_distribution_method, normal_distribution_method
+from app.lib.chi2 import Chi2
+from app.lib.ks import KS
+from app.lib.mean_test import MeanTest
+from app.lib.variance_test import VarianceTest
+import numpy as np
 
 @app.context_processor
 def override_url_for():
@@ -17,9 +22,23 @@ def dated_url_for(endpoint, **values):
             values['q'] = int(os.stat(file_path).st_mtime)
     return url_for(endpoint, **values)
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template('index.html')
+    if request.method == 'GET':
+        return render_template('index.html')
+    elif request.method == 'POST':
+        nums = np.array(request.json['numbers'])
+        print(type(nums))
+        result = {'varianza': None, 'cuadrados-medios': None, 'ks': None, 'chi-cuadrado': None}
+        if request.json['varianza']:
+            result['varianza'] = VarianceTest(nums, 0.05).getResult().tolist()
+        if request.json['cuadrados-medios']:
+            result['cuadrados-medios'] = MeanTest(nums, 0.05).getResult().tolist()
+        if request.json['ks']:
+            result['ks'] = KS(nums, 0.05).makeTest().tolist()
+        if request.json['chi-cuadrado']:
+            result['chi-cuadrado'] = Chi2(0.05, nums).makeTest().tolist()
+        return result
 
 @app.route('/mean_square', methods=['POST'])
 def mean_square():
