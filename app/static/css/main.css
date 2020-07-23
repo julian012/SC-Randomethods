@@ -264,3 +264,19 @@ input[type=checkbox] {
     width: auto;
     margin-left: 30px;
 }
+
+#proof {
+    display: flex;
+    justify-content: center;
+}
+
+#proof-result {
+    display: flex;
+    flex-direction: column;
+    text-align: justify;
+}
+
+#proof-result > p {
+    display: block;
+
+}
